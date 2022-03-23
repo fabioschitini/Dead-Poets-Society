@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <nav>
+    <ul>
+    <% if(!user){%> 
+      <li> <a href=/sign_up>Sign Up!</a></li>
+      <li><a href=/log-In>Log-In</a></li> 
+        <% }else{ %> 
+          <li><a href=/log-out>Log-Out</a></li>
+          <li><a href=//join-club>Join the Club</a></li>
+
+          <%}%> 
+</ul>
+</nav>
+
+<% if(!user){%> 
+  <h1>You need to be logged in to attempt to join the club</h1>
+    <% }else{ %> 
+      <form action="" method="POST">
+        <input  required   name="passcode" placeholder="passcode" type="text" />
+        <button type=submit>Submit</button>
+      </form>
+      <%errors.map(error=>{ %> 
+        <li> <%= error.msg %> </li>
+        <% })%> 
+
+      <%}%> 
+       
+
+</body>
+</html>

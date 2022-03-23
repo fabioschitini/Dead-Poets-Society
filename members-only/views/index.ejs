@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <ul>
+      <% if(!user){%> 
+        <li> <a href=/sign_up>Sign Up!</a></li>
+        <li><a href=/log-In>Log-In</a></li> 
+          <% }else{ %> 
+            <li><a href=/log-out>Log-Out</a></li>
+            <li><a href=/join-club>Join the club</a></li>
+            <%}%> 
+</ul>
+  </nav>
+
+
+  
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <% if(user){%> 
+      <h1>WELCOME BACK <%= user.username %></h1>
+        <% }else{ %> 
+          <h1>Welcome.please log in</h1>
+          <%}%>     
+  </body>
+</html>
