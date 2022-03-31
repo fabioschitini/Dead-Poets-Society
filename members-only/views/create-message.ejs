@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title></title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-
 </head>
 <body>
   <nav>
@@ -20,23 +19,27 @@
           <%}%> 
 </ul>
 </nav>
-<header class='speaker-form-header'>
-  <h1>Log In</h1>
-</header>
-        <form class='speaker-form' action="" method="POST">
-          <div class='form-row'>
-          <label for="username">Username</label>
-          <input class="yo" value='<%= undefined===username?``:username.username %>' required   name="username" placeholder="username" type="text" />
-          </div>
-          <div class='form-row'>
-          <label for="password">Password</label>
-          <input required  name="password" type="password" />
-          </div>
-          <div class='form-row'>
 
-          <button type=submit>Sign In</button>
-          </div>
-        </form>
+<header class='speaker-form-header'>
+  <h1>Create A Message</h1>
+  <p><em>Post messages on the website, but remeber that only members </em></p>
+
+</header>
+<form  class='speaker-form' action="" method="POST">
+    <div class='form-row'>
+      <label for="first_name">Title</label>
+      <input value='<%= undefined===message?``:username.title %>' required name="title" placeholder="My day sucked..." type="text"  />
+    </div>
+    <div class='form-row'>
+        <label for="content">Content</label>
+        <textarea  value='<%= undefined===message?``:username.message %>' required  name="content" placeholder="For start, I woke up late" type="text" /> 
+        </textarea>
+      </div>
+    <div class='form-row'>
+    <button type=submit>Submit</button>
+    </div>
+  </form>
+       
         <%errors.map(error=>{ %> 
           <li> <%= error.msg %> </li>
           <% })%> 

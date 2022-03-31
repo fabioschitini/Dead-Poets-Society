@@ -3,31 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 </head>
 <body>
   <nav>
-    <ul>
+    <ul class='nav-list' >
     <% if(!user){%> 
-      <li> <a href=/sign_up>Sign Up!</a></li>
-      <li><a href=/log-In>Log-In</a></li> 
+      <li class='nav-element'> <a href=/sign_up>Sign Up!</a></li>
+      <li class='nav-element'><a href=/log-In>Log-In</a></li> 
         <% }else{ %> 
-          <li><a href=/log-out>Log-Out</a></li>
+          <li class='nav-element'><a href=/log-out>Log-Out</a></li>
+          <li class='nav-element'><a href=/join-club>Join Club</a></li>
+          <li class='nav-element'><a href=/create-message>Create Message</a></li>
+
           <%}%> 
 </ul>
 </nav>
 
-        <form action="" method="POST">
+<header class='speaker-form-header'>
+  <h1>Sign Up</h1>
+  <p><em>Sign Up and see if you are worthy of joining the dead poets society</em></p>
+</header>
+
+        <form  class='speaker-form' action="" method="POST">
+          <div class='form-row'>
             <label for="first_name">First Name</label>
             <input value='<%= undefined===username?``:username.first_name %>' required name="first_name" placeholder="first name" type="text"  />
+          </div>
+          <div class='form-row'>
             <label for="family_name">Family Name</label>
             <input value='<%= undefined===username?``:username.family_name %>' required  name="family_name" placeholder="family name" type="text" />
+          </div>
+          <div class='form-row'>
           <label for="username">Username</label>
           <input  value='<%= undefined===username?``:username.username %>' required   name="username" placeholder="username" type="email" />
+          </div>
+          <div class='form-row'>
           <label for="password">Password</label>
           <input required  name="password" type="password" />
+          </div>
+          <div class='form-row'>
           <label for="confim_password">Confirm Password</label>
           <input required  name="confirm_password" type="password" />
+          </div>
+          <div class='form-row'>
           <button type=submit>Sign In</button>
+          </div>
         </form>
         <%errors.map(error=>{ %> 
           <li> <%= error.msg %> </li>

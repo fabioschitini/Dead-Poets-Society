@@ -3,27 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+
 </head>
 <body>
   <nav>
-    <ul>
+    <ul class='nav-list' >
     <% if(!user){%> 
-      <li> <a href=/sign_up>Sign Up!</a></li>
-      <li><a href=/log-In>Log-In</a></li> 
+      <li class='nav-element'> <a href=/sign_up>Sign Up!</a></li>
+      <li class='nav-element'><a href=/log-In>Log-In</a></li> 
         <% }else{ %> 
-          <li><a href=/log-out>Log-Out</a></li>
-          <li><a href=//join-club>Join the Club</a></li>
+          <li class='nav-element'><a href=/log-out>Log-Out</a></li>
+          <li class='nav-element'><a href=/join-club>Join Club</a></li>
 
           <%}%> 
 </ul>
 </nav>
 
+<header class='speaker-form-header'>
+  <h1>Join The Club</h1>
+  <p><em>To join The dead Poets Society you must know the secret password</em></p>
+</header>
+
 <% if(!user){%> 
   <h1>You need to be logged in to attempt to join the club</h1>
     <% }else{ %> 
-      <form action="" method="POST">
-        <input  required   name="passcode" placeholder="passcode" type="text" />
+      <form class='speaker-form' action="" method="POST">
+        <div class='form-row'>
+        <label for="pass-code">Passcode</label>
+        <input id="pass-code" required   name="passcode" placeholder="passcode" type="text" />
+        </div>
+        <div class='form-row'>
         <button type=submit>Submit</button>
+        </div>
       </form>
       <%errors.map(error=>{ %> 
         <li> <%= error.msg %> </li>

@@ -1,10 +1,5 @@
 var Users= require('../models/users');
-var Passcode= require('../models/passcode');
-var Messages = require('../models/messages');
-const asyncs=require('async')
 const { body,validationResult } = require("express-validator");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 const bcrypt=require("bcryptjs")
 let app=require('../app')
  

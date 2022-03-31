@@ -9,12 +9,10 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt=require("bcryptjs")
 const Users=require('./models/users')
-
-
 var app = express();
 
 var mongoose = require('mongoose');
-const dev_db_url=process.env.mongoDb
+const dev_db_url='mongodb+srv://schitini:Fabiolindo1@node-projects.zykqj.mongodb.net/members-only?retryWrites=true&w=majority'
 var mongoDB =  dev_db_url;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
@@ -47,7 +45,7 @@ passport.use(
             return done(null, user)
           } else {
             // passwords do not match!
-            return done(null, false, { message: "Incorrect password" })
+          return done(null, false, { message: "Incorrect password" })
           }
         })
       return done(null, user);
@@ -55,20 +53,20 @@ passport.use(
   })
 );
 
+
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
   Users.findById(id, function(err, user) {
-    done(err, user);
+     done(err, user);
   });
 });
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
-
 
 
 app.post(
@@ -86,8 +84,14 @@ app.get("/log-out", (req, res) => {
 
 
 
+
+
+
 var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
+
+
+
 
 
 // catch 404 and forward to error handler

@@ -3,29 +3,48 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
   </head>
   <body>
-    <nav>
-      <ul>
-      <% if(!user){%> 
-        <li> <a href=/sign_up>Sign Up!</a></li>
-        <li><a href=/log-In>Log-In</a></li> 
-          <% }else{ %> 
-            <li><a href=/log-out>Log-Out</a></li>
-            <li><a href=/join-club>Join the club</a></li>
-            <%}%> 
-</ul>
-  </nav>
-
-
-  
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-
-    <% if(user){%> 
-      <h1>WELCOME BACK <%= user.username %></h1>
+   <nav>
+    <ul class='nav-list' >
+    <% if(!user){%> 
+      <li class='nav-element'> <a href=/sign_up>Sign Up!</a></li>
+      <li class='nav-element'><a href=/log-In>Log-In</a></li> 
         <% }else{ %> 
-          <h1>Welcome.please log in</h1>
-          <%}%>     
+          <li class='nav-element'><a href=/log-out>Log-Out</a></li>
+          <li class='nav-element'><a href=/join-club>Join Club</a></li>
+          <li class='nav-element'><a href=/create-message>Create Message</a></li>
+
+          <%}%> 
+</ul>
+</nav>
+<div >
+      <% messages.map(message=>{ %> 
+        <div class="list-container">
+          
+         <ul class="whole-list">
+          <h1><%=message.title  %> </h1>
+          <li class="individual-list"><%= message.content %> </li>
+          <% if(user) { %>
+            <% if(user.status=='true' || user.status=='admin') { %>
+              <li class="individual-list"><%= message.username %> </li>
+              <% if(user.status=='admin') { %>
+                <form action="" method="POST">
+                  <input type="hidden" name="deletar" value="<%=message._id %>">
+                  <button class="deletar">Delete </button>
+                </form>
+                <%  }%> 
+              <%  }%> 
+                 <%  }%> 
+
+          
+        </ul>
+
+      
+       
+        </div>
+        <%  }) %> 
+      </div>
   </body>
 </html>

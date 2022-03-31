@@ -3,9 +3,8 @@ const Schema=mongoose.Schema
 
 const MessageSchema=new Schema({
     title:{type:String,required:true},
-    time:{ type: Date, default: Date.now },
     content:{type:String,required:true},
-    username:{type:Schema.ObjectId,ref:`Users`},
+    username:{type:String,required:true},
   }
 )
 
