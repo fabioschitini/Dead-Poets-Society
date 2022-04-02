@@ -2,7 +2,7 @@ var Users= require('../models/users');
 const { body,validationResult } = require("express-validator");
 const bcrypt=require("bcryptjs")
 let app=require('../app')
- 
+const passport=require('passport')
 
 
 exports.sign_up_get=(req,res,next)=>{

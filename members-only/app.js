@@ -9,8 +9,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt=require("bcryptjs")
 const Users=require('./models/users')
-var app = express();
 
+var app = express();
 var mongoose = require('mongoose');
 const dev_db_url='mongodb+srv://schitini:Fabiolindo1@node-projects.zykqj.mongodb.net/members-only?retryWrites=true&w=majority'
 var mongoDB =  dev_db_url;
@@ -32,23 +32,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 passport.use(
   new LocalStrategy((username, password, done) => {
     Users.findOne({ username: username }, (err, user) => {
-      if (err) { 
-        return done(err);
+      try{
+        if (!user) {
+    
+          return done(null, false, { message: "Incorrect username" });
+        }
+        bcrypt.compare(password, user.password, (err, res) => {
+            if (res) {
+              // passwords match! log user in
+              return done(null, user)
+            } else {
+              // passwords do not match!
+            return done(null, false, { message: "Incorrect password" })
+            }
+          })
       }
-      if (!user) {
-        
-        return done(null, false, { message: "Incorrect username" });
+      catch(err){
+        return done(err,false);
       }
-      bcrypt.compare(password, user.password, (err, res) => {
-          if (res) {
-            // passwords match! log user in
-            return done(null, user)
-          } else {
-            // passwords do not match!
-          return done(null, false, { message: "Incorrect password" })
-          }
-        })
-      return done(null, user);
     });
   })
 );
@@ -60,30 +61,13 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
   Users.findById(id, function(err, user) {
-     done(err, user);
+    done(err, user);
   });
 });
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
-
-
-app.post(
-  "/log-in",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/sign_up"
-  })
-);
-
-app.get("/log-out", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
-
-
-
 
 
 
