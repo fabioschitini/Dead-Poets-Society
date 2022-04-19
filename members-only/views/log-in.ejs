@@ -40,6 +40,9 @@
         <%errors.map(error=>{ %> 
           <li> <%= error.msg %> </li>
           <% })%> 
+          <% if (messages.error) { %>
+            <%= messages.error %>
+          <% } %>
 
 </body>
 </html>
