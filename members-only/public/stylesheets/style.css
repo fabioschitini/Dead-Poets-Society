@@ -259,6 +259,31 @@ box-shadow: none; /* Remove default red glow in Firefox */
   color: red;
   font-style: italic;
 }
+
+.post-content{
+  padding: 20px;
+}
+
+.post-header {
+  text-align: center;
+  background-color: #F6F7F8;
+  border: 1px solid #D6D9DC;
+  border-radius: 3px;  
+  margin: 40px 0;
+  padding: 37px;
+}
+
+.post-content-div{
+  text-align: center;
+  background-color: #F6F7F8;
+  border: 1px solid #D6D9DC;
+  border-radius: 3px;  
+  margin: 40px 0;
+  padding: 37px;
+}
+
+
+
       /*------------------------------------------------------------------------------------------- */
 
 @media only screen and (min-width: 700px) {
