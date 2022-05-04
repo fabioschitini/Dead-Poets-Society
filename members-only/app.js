@@ -8,10 +8,13 @@ require('dotenv').config();
 const flash = require('express-flash')
 const passport = require("passport");
 const Users=require('./models/users')
+console.log(process.env.mongoDB) 
+
 
 var app = express();
-var mongoose = require('mongoose');
-const dev_db_url='mongodb+srv://schitini:Fabiolindo1@node-projects.zykqj.mongodb.net/members-only?retryWrites=true&w=majority'
+var mongoose = require('mongoose'); 
+
+const dev_db_url=process.env.mongoDb
 var mongoDB =  dev_db_url;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
