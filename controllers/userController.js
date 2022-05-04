@@ -52,6 +52,7 @@ throw new Error('this email is already in use');
                     username:req.body.username,
                     password:hashedPassword,
                     status:'false',
+                    passcode:'none'
                 }).save(err=>{
                     if(err){return next(err)}
                     res.redirect("/log-in")
@@ -66,25 +67,25 @@ exports.log_in_get=(req,res,next)=>{
 
 }
 exports.join_club_get=(req,res,next)=>{
-   console.log(req.user)
+   //console.log(req.user)
     res.render('join-club', {title:`express`, secret:undefined,errors:[],user:req.user} );
 }
 
 exports.join_club_post=[
     body('passcode').custom(async (value,{req}) => {
-        console.log(req.user,'user')
- let yo=await Users.find({'status':'admin'});
-       if(value===yo[0].passcode){
+      //  console.log(req.user,'user')
+ let admin=await Users.find({'status':'admin'});
+ console.log("admmmmmmmmmmmmmmmmmmmmmmmmmmm",admin[0].passcode)
+ console.log("Valueeeeeeeeeeeeeeeee",value)
+       if(value===admin[0].passcode){
+           console.log("Should workkkkkkkkkkkkkkkkkkkkkkkkkkk")
        }
        else throw new Error('The passcode is incorrect');
-
-      
-       
      }).trim().escape(),
 //    Users.find({'status':'admin'}).then(result=>{
 
     (req,res,next)=>{
-        console.log(`what is happening?`)
+      //  console.log(`what is happening?`)
         const errors=validationResult(req)
       
        

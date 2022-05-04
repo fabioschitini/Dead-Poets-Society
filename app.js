@@ -8,7 +8,6 @@ require('dotenv').config();
 const flash = require('express-flash')
 const passport = require("passport");
 const Users=require('./models/users')
-console.log(process.env.mongoDB) 
 
 
 var app = express();
