@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <title></title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -52,9 +53,9 @@
     </div>
     <div class="form-floating">
       <label for="floatingInput">Confirm Password</label>
-      <input required  name="confirm_password" type="password"  class="form-control" id="floatingInput" >
+      <input style="margin-bottom:18px;" required  name="confirm_password" type="password"  class="form-control" id="floatingInput" >
       <%errors.map(error=>{ %> 
-        <label for="floatingInput"> <%= error.msg %> </label>
+        <label style="margin-bottom:18px;" for="floatingInput"> <%= error.msg %> </label>
         <% })%> 
     </div>
 
