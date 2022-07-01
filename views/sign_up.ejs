@@ -3,60 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-</head>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></head>
 <body>
-  <nav>
-    <ul class='nav-list' >
-    <% if(!user){%> 
-      <li class='nav-element'> <a href=/sign_up>Sign Up!</a></li>
-      <li class='nav-element'><a href=/log-In>Log-In</a></li> 
+  <div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+      </a>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <% if(!user){%> 
+          <li><a href=/ class="nav-link px-2 link-dark">Home</a></li>
+        <li><a href=/sign_up class="nav-link px-2 link-secondary">Sign Up!</a></li>
+        <li><a href=/log-In class="nav-link px-2 link-dark">Log-In</a></li>
         <% }else{ %> 
-          <li class='nav-element'><a href=/log-out>Log-Out</a></li>
-          <li class='nav-element'><a href=/join-club>Join Club</a></li>
-          <li class='nav-element'><a href=/create-message>Create Message</a></li>
+          <li><a href=/ class="nav-link px-2 link-dark">Home</a></li>
+        <li><a href=/log-out class="nav-link px-2 link-dark">Log-Out</a></li>
+        <li><a href=/join-club class="nav-link px-2 link-dark">Join Club</a></li>
+        <li><a href=/create-message class="nav-link px-2 link-dark">Create Message</a></li>
+        <%}%> 
 
-          <%}%> 
-</ul>
-</nav>
+      </ul>
 
-<header class='speaker-form-header'>
-  <h1>Sign Up</h1>
-  <p><em>Sign Up and see if you are worthy of joining the dead poets society</em></p>
-</header>
+    </header>
+  </div>
 
-        <form  class='speaker-form' action="" method="POST">
-          <div class='form-row'>
-            <label for="first_name">First Name</label>
-            <input value='<%= undefined===username?``:username.first_name %>' required name="first_name" placeholder="first name" type="text"  />
-          </div>
-          <div class='form-row'>
-            <label for="family_name">Family Name</label>
-            <input value='<%= undefined===username?``:username.family_name %>' required  name="family_name" placeholder="family name" type="text" />
-          </div>
-          <div class='form-row'>
-          <label for="username">Username</label>
-          <input  value='<%= undefined===username?``:username.username %>' required   name="username" placeholder="username" type="email" />
-          </div>
-          <div class='form-row'>
-          <label for="password">Password</label>
-          <input required  name="password" type="password" />
-          </div>
-          <div class='form-row'>
-          <label for="confim_password">Confirm Password</label>
-          <input required  name="confirm_password" type="password" />
-          </div>
-          <div class='form-row'>
-          <button type=submit>Sign In</button>
-          </div>
-        </form>
+<main class="form-signin w-100 m-auto">
+  <form style="max-width: 720px;margin-left: auto;margin-right: auto;" action="" method="POST">
+    <h1 class="h3 mb-3 fw-normal">Sign Up and see if you are worthy of joining the dead poets society</h1>
+
+    <div class="form-floating">
+      <label for="floatingInput">First Name</label>
+      <input value='<%= undefined===username?``:username.first_name %>' required name="first_name" placeholder="first name" type="text"  class="form-control" id="floatingInput" >
+    </div>
+    <div class="form-floating">
+      <label for="floatingInput">Family Name</label>
+      <input value='<%= undefined===username?``:username.family_name %>' required  name="family_name" placeholder="family name" type="text"  class="form-control" id="floatingInput" >
+    </div>
+    <div class="form-floating">
+      <label for="floatingInput">Username</label>
+      <input  value='<%= undefined===username?``:username.username %>' required   name="username" placeholder="username" type="email"   class="form-control" id="floatingInput" >
+    </div>
+    <div class="form-floating">
+      <label for="floatingInput">Password</label>
+      <input required  name="password" type="password"  class="form-control" id="floatingInput" >
+    </div>
+    <div class="form-floating">
+      <label for="floatingInput">Confirm Password</label>
+      <input required  name="confirm_password" type="password"  class="form-control" id="floatingInput" >
+      <%errors.map(error=>{ %> 
+        <label for="floatingInput"> <%= error.msg %> </label>
+        <% })%> 
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+  </form>
+</main>
+
         <%errors.map(error=>{ %> 
           <li> <%= error.msg %> </li>
           <% })%> 
 
-          <% if (messages.error) { %>
-            <%= messages.error %>
-          <% } %>
+     
 
 </body>
 </html>

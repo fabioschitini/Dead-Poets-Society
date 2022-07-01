@@ -3,47 +3,68 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
 
+      
+      
+    </style>
   </head>
+  
   <body>
-   <nav>
-    <ul class='nav-list' >
-    <% if(!user){%> 
-      <li class='nav-element'> <a href=/sign_up>Sign Up!</a></li>
-      <li class='nav-element'><a href=/log-In>Log-In</a></li> 
-        <% }else{ %> 
-          <li class='nav-element'><a href=/log-out>Log-Out</a></li>
-          <li class='nav-element'><a href=/join-club>Join Club</a></li>
-          <li class='nav-element'><a href=/create-message>Create Message</a></li>
-
+    <div class="container">
+      <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+  
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <% if(!user){%> 
+            <li><a href=/ class="nav-link px-2 link-dark">Home</a></li>
+          <li><a href=/sign_up class="nav-link px-2 link-secondary">Sign Up!</a></li>
+          <li><a href=/log-In class="nav-link px-2 link-dark">Log-In</a></li>
+          <% }else{ %> 
+            <li><a href=/ class="nav-link px-2 link-dark">Home</a></li>
+          <li><a href=/log-out class="nav-link px-2 link-dark">Log-Out</a></li>
+          <li><a href=/join-club class="nav-link px-2 link-dark">Join Club</a></li>
+          <li><a href=/create-message class="nav-link px-2 link-dark">Create Message</a></li>
           <%}%> 
-</ul>
-</nav>
-<div >
-      <% messages.map(message=>{ %> 
-           
 
-        <div>
-            <div>
-        <header class='post-header'>
-          <h1><%=message.title  %></h1>
-              </header>
-              <div class='post-content-div'> 
-           <p className='post-content'><%= message.content %> </p>
-           </div>
+        </ul>
+  
+      </header>
+    </div>
+ 
+    <div class="row mb-2">
+      <% messages.map(message=>{ %> 
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary">World</strong>
+              <h1 class="mb-0"><%=message.title  %></h1>
+              <div class="mb-1 text-muted">Nov 12</div>
+              <p class="card-text mb-auto"><%= message.content %></p>
+              <% if(user) { %>
+                <% if(user.status=='true' || user.status=='admin') { %>
+                  <h3><%= message.username %> </h3>
+                  <% if(user.status=='admin') { %>
+                    <form action="" method="POST">
+                      <input type="hidden" name="deletar" value="<%=message._id %>">
+                      <button class="deletar">Delete </button>
+                    </form>
+                    <%  }%> 
+                  <%  }%> 
+                     <%  }%> 
+            </div>
+            <div class="col-auto d-none d-lg-block">
+    
+            </div>
           </div>
-          <% if(user) { %>
-            <% if(user.status=='true' || user.status=='admin') { %>
-              <p><%= message.username %> </p>
-              <% if(user.status=='admin') { %>
-                <form action="" method="POST">
-                  <input type="hidden" name="deletar" value="<%=message._id %>">
-                  <button class="deletar">Delete </button>
-                </form>
-                <%  }%> 
-              <%  }%> 
-                 <%  }%> 
         </div>
+
+
+      
         <%  }) %> 
       </div>
   </body>
